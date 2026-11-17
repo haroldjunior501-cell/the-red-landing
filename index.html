@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE RED</title>
+<meta name="description" content="THE RED, l'application mobile des supporters de Manchester United : matchs, actualités et communauté dans une seule app. Projet individuel Holberton School.">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#DA291C;--ink:#14100F;--muted:#5A5350;--surface:#F3F1EF;--line:#CFC9C5;--yellow:#FBE122;
+--display:'Barlow Condensed','Arial Narrow',Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Barlow',system-ui,sans-serif;font-size:18px;line-height:1.5;color:var(--ink);background:#fff}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto}
+.pad{padding:clamp(56px,8vw,104px) max(clamp(20px,5vw,64px),env(safe-area-inset-left,0px))}
+.eyebrow{margin:0;font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.display{font-family:var(--display);font-weight:800;text-transform:uppercase;margin:0}
+h2.display{font-size:clamp(40px,6vw,72px);line-height:.95;text-wrap:balance}
+h3.display{font-size:34px;line-height:1}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 28px;font-weight:600;font-size:17px;text-decoration:none;border-radius:4px}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-line{border:2px solid #fff;color:#fff}
+
+/* hero */
+header{background:var(--red);color:#fff;padding:20px max(clamp(20px,5vw,64px),env(safe-area-inset-left,0px)) clamp(56px,8vw,104px)}
+header .wrap{display:flex;flex-direction:column;gap:clamp(36px,6vw,72px)}
+nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 32px}
+nav .brand{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;padding:8px 0}
+nav .links{display:flex;flex-wrap:wrap;gap:0 28px;font-weight:600;font-size:16px}
+nav .links a{text-decoration:none;padding:12px 0}
+.hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:48px}
+.hero-text{flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:28px}
+h1{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(60px,10vw,136px);line-height:.9;text-transform:uppercase;text-wrap:balance}
+.lead{margin:0;max-width:520px;font-size:22px;line-height:1.45}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:20px 40px;padding-top:28px;border-top:1px solid #fff}
+.fact{display:flex;align-items:baseline;gap:10px;font-size:15px;font-weight:500}
+.fact b{font-family:var(--display);font-weight:800;font-size:44px;line-height:1}
+
+/* phone */
+.phone{flex:0 0 auto;width:300px;max-width:100%;height:620px;border:10px solid var(--ink);border-radius:44px;background:#fff;color:var(--ink);box-shadow:0 32px 64px rgba(20,16,15,.35);display:flex;flex-direction:column;overflow:hidden;margin:0 auto}
+.ph-top{padding:22px 20px 12px;display:flex;justify-content:space-between;align-items:center}
+.ph-top .w{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--red)}
+.ph-top .s{font-size:12px;font-weight:600;color:var(--muted)}
+.ph-body{flex:1;min-height:0;padding:0 16px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.card{background:var(--ink);color:#fff;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.card .head{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:500}
+.pill-live{background:var(--yellow);color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+.teams{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.teams div{display:flex;flex-direction:column;gap:6px}
+.teams .n{font-weight:600;font-size:16px}
+.teams .sc{font-family:var(--display);font-weight:800;font-size:28px;line-height:1}
+.segs{display:flex;gap:6px;font-size:12px;font-weight:600}
+.segs span{padding:5px 12px;border:1px solid #fff;border-radius:999px}
+.segs .on{background:#fff;color:var(--ink)}
+.sk{height:38px;background:var(--surface);border-radius:8px}
+.ph-note{margin:0;font-size:12px;color:var(--muted)}
+.tabs{display:flex;border-top:1px solid #E4E0DD;padding:10px 6px 16px;font-size:11px;font-weight:600;text-align:center;color:var(--muted)}
+.tabs span{flex:1 1 0;min-width:0}
+.tabs .on{color:var(--red);font-weight:700}
+
+/* piliers */
+.head-block{display:flex;flex-direction:column;gap:16px;max-width:760px}
+.head-block .eyebrow{color:var(--red)}
+.cards{display:flex;flex-wrap:wrap;gap:24px}
+.pillar{flex:1 1 300px;min-width:0;background:var(--surface);border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:16px}
+.pillar p{margin:0;color:var(--muted)}
+.pillar ul,.col ul,.col ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.react{margin-top:auto;padding-top:16px;display:flex;flex-direction:column;gap:12px}
+.react small{font-size:14px;font-weight:600;color:var(--muted)}
+.react .btns{display:flex;flex-wrap:wrap;gap:8px}
+.react button{min-height:44px;padding:0 22px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.react button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+
+/* regle d'or */
+.gold{background:var(--ink);color:#fff}
+.gold .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:40px 64px}
+.gold .col{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.gold h2{font-size:clamp(44px,7vw,96px);line-height:.92}
+.gold h2 em{font-style:normal;color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chips span{border:1px solid #fff;padding:10px 22px;font-family:var(--display);font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.04em}
+
+/* technique */
+.tech{background:var(--surface)}
+.tech .wrap{display:flex;flex-direction:column;gap:56px}
+.arch{display:flex;flex-wrap:wrap;gap:12px}
+.arch div{flex:1 1 200px;min-width:0;background:#fff;border-radius:6px;padding:22px 24px;display:flex;flex-direction:column;gap:4px}
+.arch .ext{background:transparent;border:2px dashed var(--ink)}
+.arch b{font-family:var(--display);font-weight:800;font-size:28px;line-height:1.05;text-transform:uppercase}
+.arch span{font-size:15px;color:var(--muted)}
+.note{margin:16px 0 0;max-width:760px;color:var(--muted)}
+.stack{border-bottom:1px solid var(--line)}
+.stack .r{display:flex;flex-wrap:wrap;gap:6px 32px;padding:20px 0;border-top:1px solid var(--line)}
+.stack .r b{flex:1 1 280px;min-width:0;font-family:var(--display);font-weight:700;font-size:26px;line-height:1.15;text-transform:uppercase;letter-spacing:.02em}
+.stack .r span{flex:1 1 280px;min-width:0;color:var(--muted)}
+.tests{display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;background:#fff;border-radius:6px;padding:32px}
+.tests .big{font-family:var(--display);font-weight:800;font-size:clamp(64px,9vw,104px);line-height:.9;color:var(--red)}
+.tests div{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.tests b{font-family:var(--display);font-weight:700;font-size:28px;line-height:1.1;text-transform:uppercase}
+.tests span{color:var(--muted)}
+
+/* avancement */
+.status .wrap{display:flex;flex-direction:column;gap:48px}
+.cols{display:flex;flex-wrap:wrap;gap:40px 48px}
+.col{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.col h3{font-size:32px}
+.col ol{padding-left:24px}
+
+/* install */
+.install{background:var(--ink);color:#fff}
+.install .wrap{display:flex;flex-wrap:wrap;gap:40px 64px}
+.install .l{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.install .l p.t{margin:0;max-width:460px}
+.install .rr{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px}
+pre{margin:0;padding:24px;overflow-x:auto;background:#221C1A;border:1px solid #3A3330;border-radius:6px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:15px;line-height:1.8;color:#F3F1EF}
+footer{background:var(--ink);color:#fff;padding:0 max(clamp(20px,5vw,64px),env(safe-area-inset-left,0px)) 48px}
+footer .wrap{padding-top:32px;border-top:1px solid #3A3330;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:15px}
+footer .brand{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header id="top">
+<div class="wrap">
+<nav aria-label="Navigation principale">
+<a class="brand" href="#top">The Red</a>
+<div class="links">
+<a href="#piliers">Piliers</a>
+<a href="#technique">Technique</a>
+<a href="#avancement">Avancement</a>
+<a href="https://github.com/haroldjunior501-cell/the-red">GitHub</a>
+</div>
+</nav>
+
+<div class="hero">
+<div class="hero-text">
+<p class="eyebrow">Projet individuel · Holberton School</p>
+<h1>Tout United dans une seule app</h1>
+<p class="lead">L'application mobile des supporters de Manchester United. Matchs, actualités et communauté réunis au même endroit.</p>
+<div class="row">
+<a class="btn btn-light" href="#piliers">Découvrir les 3 piliers</a>
+<a class="btn btn-line" href="https://github.com/haroldjunior501-cell/the-red">Voir le code sur GitHub</a>
+</div>
+<div class="facts">
+<div class="fact"><b>5</b> onglets</div>
+<div class="fact"><b>3</b> taps maximum par fonction clé</div>
+<div class="fact"><b>5/5</b> tests Pytest verts</div>
+</div>
+</div>
+
+<div class="phone" role="img" aria-label="Aperçu de l'écran Live de l'application">
+<div class="ph-top"><span class="w">The Red</span><span class="s">Live</span></div>
+<div class="ph-body">
+<div class="card">
+<div class="head"><span class="pill-live">Live</span><span>via FotMob</span></div>
+<div class="teams">
+<div class="n"><span>Manchester United</span><span>Adversaire</span></div>
+<div class="sc"><span>–</span><span>–</span></div>
+</div>
+<div class="segs"><span class="on">Live</span><span>Stats</span><span>Compos</span></div>
+</div>
+<div class="sk"></div><div class="sk"></div><div class="sk"></div>
+<p class="ph-note">Rafraîchi toutes les 12 secondes</p>
+</div>
+<div class="tabs"><span>Home</span><span class="on">Live</span><span>Vidéos</span><span>Mon XI</span><span>Programme</span></div>
+</div>
+</div>
+</div>
+</header>
+
+<section id="piliers" class="pad">
+<div class="wrap" style="display:flex;flex-direction:column;gap:48px">
+<div class="head-block">
+<p class="eyebrow">Fonctionnalités du MVP</p>
+<h2 class="display">Trois piliers pour suivre son club</h2>
+</div>
+<div class="cards">
+<div class="pillar">
+<h3 class="display">Match Center</h3>
+<p>Tout ce qu'il faut pour vivre un match, avant, pendant et après le coup de sifflet.</p>
+<ul><li>Calendrier</li><li>Scores</li><li>Détail d'un match : live, stats, compositions</li></ul>
+</div>
+<div class="pillar">
+<h3 class="display">United News</h3>
+<p>Les actualités du club, lisibles directement dans l'app.</p>
+<ul><li>Actualités du club</li><li>Lecture d'article</li></ul>
+</div>
+<div class="pillar">
+<h3 class="display">Fan Community</h3>
+<p>Un espace pour réagir et échanger avec les autres supporters.</p>
+<ul><li>Posts</li><li>Commentaires</li><li>Réactions Red, Fire ou Like</li></ul>
+<div class="react">
+<small>Essayez : une seule réaction par supporter et par post.</small>
+<div class="btns" id="reactions">
+<button type="button" data-r="red" aria-pressed="true">Red</button>
+<button type="button" data-r="fire" aria-pressed="false">Fire</button>
+<button type="button" data-r="like" aria-pressed="false">Like</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="gold pad" style="padding-block:clamp(56px,8vw,96px)">
+<div class="wrap">
+<div class="col">
+<p class="eyebrow">La règle d'or</p>
+<h2 class="display">Toute fonction clé en <em>3 taps</em> maximum</h2>
+</div>
+<div class="col">
+<p class="eyebrow">5 onglets</p>
+<div class="chips"><span>Home</span><span>Live</span><span>Vidéos</span><span>Mon XI</span><span>Programme</span></div>
+</div>
+</div>
+</section>
+
+<section id="technique" class="tech pad">
+<div class="wrap">
+<div class="head-block">
+<p class="eyebrow">Sous le capot</p>
+<h2 class="display">Une architecture en trois niveaux</h2>
+</div>
+
+<div>
+<div class="arch">
+<div><b>Mobile Expo</b><span>React Native, TypeScript</span></div>
+<div><b>Nginx</b><span>Reverse proxy</span></div>
+<div><b>FastAPI</b><span>Routeurs /api/v1</span></div>
+<div><b>PostgreSQL 16</b><span>7 tables</span></div>
+<div class="ext"><b>FotMob</b><span>Source externe, appelée en direct</span></div>
+</div>
+<p class="note">Le mobile parle à l'API en passant par Nginx. Pour le live, le programme et le classement, il interroge FotMob directement, avec du cache et un mode dégradé si la source tombe.</p>
+</div>
+
+<div>
+<h3 class="display" style="margin-bottom:16px">Chaque outil répond à un besoin</h3>
+<div class="stack">
+<div class="r"><b>Expo / React Native + TypeScript</b><span>Un seul code pour iOS et Android, avec un typage fort.</span></div>
+<div class="r"><b>TanStack Query + Axios</b><span>Cache, refetch et polling des scores.</span></div>
+<div class="r"><b>FastAPI + Pydantic</b><span>API rapide, validation des données, documentation Swagger sur /docs.</span></div>
+<div class="r"><b>PostgreSQL + SQLAlchemy + Alembic</b><span>Données relationnelles et migrations.</span></div>
+<div class="r"><b>bcrypt + JWT (PyJWT)</b><span>Mots de passe hachés et sessions sans état, valables 7 jours.</span></div>
+<div class="r"><b>Docker Compose + Nginx</b><span>Environnement reproductible et reverse proxy.</span></div>
+<div class="r"><b>Pytest</b><span>Tests d'intégration de l'API.</span></div>
+</div>
+</div>
+
+<div class="tests">
+<span class="big">5/5</span>
+<div><b>Tests Pytest verts</b><span>Santé de l'API, inscription avec jeton et profil, matchs, news et parcours communauté, sur une base SQLite en mémoire par test.</span></div>
+</div>
+</div>
+</section>
+
+<section id="avancement" class="status pad">
+<div class="wrap">
+<div class="head-block">
+<p class="eyebrow">Avancement</p>
+<h2 class="display">Ce qui est réel, ce qui reste à faire</h2>
+</div>
+<div class="cols">
+<div class="col">
+<h3 class="display">Déjà réel</h3>
+<ul>
+<li>Inscription et connexion : mots de passe bcrypt, jeton JWT</li>
+<li>Communauté : posts, commentaires, réactions</li>
+<li>Live, programme et classement via FotMob, avec mode de secours</li>
+</ul>
+</div>
+<div class="col">
+<h3 class="display">Simulé pour l'instant</h3>
+<ul>
+<li>Adaptateurs backend football et news, branchés sur des données de test</li>
+<li>Isolés derrière des adaptateurs, ils se remplacent par de vraies sources sans toucher au reste</li>
+</ul>
+</div>
+<div class="col">
+<h3 class="display">Feuille de route</h3>
+<ol>
+<li>Brancher la communauté et l'écran de connexion</li>
+<li>Corriger la migration</li>
+<li>Secrets en variables d'environnement</li>
+<li>Cache API et refresh tokens</li>
+<li>CI avec Pytest et pull requests</li>
+<li>Tests mobiles de bout en bout</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+
+<section class="install pad" style="padding-block:clamp(56px,8vw,96px)">
+<div class="wrap">
+<div class="l">
+<p class="eyebrow">Installation</p>
+<h2 class="display">Lancer le projet en une commande</h2>
+<p class="t">Docker Compose démarre PostgreSQL, l'API et Nginx ensemble. Le README détaille l'architecture, le schéma de la base et l'installation locale.</p>
+<div class="row"><a class="btn btn-light" href="https://github.com/haroldjunior501-cell/the-red">Ouvrir le dépôt GitHub</a></div>
+</div>
+<div class="rr">
+<pre>git clone https://github.com/haroldjunior501-cell/the-red.git
+cd the-red
+docker compose up --build -d
+# Swagger : http://localhost/docs</pre>
+<pre># Lancer les 5 tests
+cd backend &amp;&amp; python -m pytest tests/</pre>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+<span class="brand">The Red</span>
+<span>Projet individuel · Holberton School · Harold Nguemeta</span>
+<span>Projet de fan indépendant, sans lien avec Manchester United.</span>
+</div>
+</footer>
+
+<script>
+(function () {
+  var box = document.getElementById('reactions');
+  if (!box) return;
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    box.querySelectorAll('button').forEach(function (x) {
+      x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+    });
+  });
+})();
+</script>
+</body>
+</html>
